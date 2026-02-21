@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\UserService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +12,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        //Exercise3
+        $this->app->singleton(UserService::class, function ($app) {
+            $users = [
+                ['id' => 1, 'name' => 'John Doe'],
+                ['id' => 2, 'name' => 'Jane Doe']
+            ];
+            return new UserService($users);
+        });
     }
 
     /**
